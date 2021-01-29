@@ -5,9 +5,11 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 **推荐阅读顺序：**
 
-一、切片，接口，性能：[base.go](https://github.com/roseduan/go-patterns/blob/main/base.go)
+一、切片，接口，性能
 
-**references : **
+[base.go](https://github.com/roseduan/go-patterns/blob/main/base.go)
+
+参考阅读：
 
 [Effective Go](https://golang.org/doc/effective_go.html)
 
@@ -19,9 +21,9 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
 
-二、错误处理：
+二、错误处理
 
-**references : **
+参考阅读：
 
 [Golang Error Handling lesson by Rob Pike](http://jxck.hatenablog.com/entry/golang-error-handling-lesson-by-rob-pike)
 
@@ -35,11 +37,21 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 三、Functional Options
 
-**references  : **
+参考阅读：
 
 [Self-referential functions and the design of options](https://commandcenter.blogspot.com/2014/01/self-referential-functions-and-design.html)
 
 [Implementing the Options Pattern in Golang](https://www.sohamkamani.com/golang/options-pattern/)
 
-四、委托和控制反转：
+四、委托和控制反转
+
+参考阅读：
+
+[IOC/DIP其实是一种管理思想](https://coolshell.cn/articles/9949.html)
+
+[Dependency Injection and IoC Container in Go](https://medium.com/@miladrahimi/dependency-injection-and-ioc-container-in-go-golang-928c5c416f28)
+
+五、Map-Reduce
+
+参考阅读：
 
