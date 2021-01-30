@@ -1,11 +1,11 @@
 # go-patterns
-Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，十分感谢，也欢迎访问耗子叔的博客学习更多知识：[https://coolshell.cn/](https://coolshell.cn/)
+Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，十分感谢。
+
+也欢迎访问耗子叔的博客学习更多知识：[https://coolshell.cn](https://coolshell.cn/)
 
 ***
 
-**推荐阅读顺序：**
-
-一、切片，接口，性能
+### 一、切片，接口，性能
 
 [base.go](https://github.com/roseduan/go-patterns/blob/main/base.go)
 
@@ -21,7 +21,9 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
 
-二、错误处理
+### 二、错误处理
+
+[error_handle.go](https://github.com/roseduan/go-patterns/blob/main/error_handle.go)
 
 参考阅读：
 
@@ -35,7 +37,9 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Golang: Six Error Handling techniques to help you write elegant code](https://medium.com/higher-order-functions/golang-six-error-handling-techniques-to-help-you-write-elegant-code-8e6363e6d2b)
 
-三、Functional Options
+### 三、Functional Options
+
+[functional_options.go](https://github.com/roseduan/go-patterns/blob/main/functional_options.go)
 
 参考阅读：
 
@@ -43,7 +47,9 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Implementing the Options Pattern in Golang](https://www.sohamkamani.com/golang/options-pattern/)
 
-四、委托和控制反转
+### 四、委托和控制反转
+
+[ioc.go](https://github.com/roseduan/go-patterns/blob/main/ioc.go)
 
 参考阅读：
 
@@ -51,7 +57,27 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Dependency Injection and IoC Container in Go](https://medium.com/@miladrahimi/dependency-injection-and-ioc-container-in-go-golang-928c5c416f28)
 
-五、Map-Reduce
+### 五、Map-Reduce
+
+[map_reduce.go](https://github.com/roseduan/go-patterns/blob/main/map_reduce.go)
 
 参考阅读：
+
+[官方文档：反射 reflect 包介绍](https://golang.org/pkg/reflect/)
+
+[The Laws of Reflection](https://blog.golang.org/laws-of-reflection)
+
+[Simple apply/filter/reduce package — Rob Pike](https://github.com/robpike/filter)
+
+### 六、Go Generation
+
+[generation.go](https://github.com/roseduan/go-patterns/blob/main/generation.go)
+
+### 七、修饰器模式
+
+[decorator.go](https://github.com/roseduan/go-patterns/blob/main/decorator.go)
+
+参考阅读：
+
+[函数式编程](https://coolshell.cn/articles/10822.html)
 

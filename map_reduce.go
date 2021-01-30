@@ -149,7 +149,6 @@ func verifySignature(fn reflect.Value, types ...reflect.Type) bool {
 		return false
 	}
 
-
 	//检查方法入参和出参是否符合预期
 	if fn.Type().NumIn() != len(types)-1 || fn.Type().NumOut() != 1 {
 		return false
@@ -167,6 +166,87 @@ func verifySignature(fn reflect.Value, types ...reflect.Type) bool {
 	}
 
 	return true
+}
+
+//利用上面的技巧，将reduce和filter函数都改造成泛型的
+func GenericReduce(slice, pairFunc, zero interface{}) (interface{}, error) {
+	sliceInType := reflect.ValueOf(slice)
+	if sliceInType.Kind() != reflect.Slice {
+		return nil, errors.New("not slice type")
+	}
+
+	length := sliceInType.Len()
+	if length == 0 {
+		return zero, nil
+	} else if length == 1 {
+		return sliceInType.Index(0), nil
+	}
+
+	elemType := sliceInType.Type().Elem()
+	vfn := reflect.ValueOf(pairFunc)
+	if !verifySignature(vfn, elemType, elemType, elemType) {
+		return nil, errors.New("func is not the right type")
+	}
+
+	ins := [2]reflect.Value{sliceInType.Index(0), sliceInType.Index(1)}
+	out := vfn.Call(ins[:])[0]
+
+	for i := 2; i < length; i++ {
+		ins[0], ins[1] = out, sliceInType.Index(i)
+		out = vfn.Call(ins[:])[0]
+	}
+
+	return out.Interface(), nil
+}
+
+
+func GenericFilter(slice, function interface{}) interface{} {
+	result, _ := filter(slice, function, false)
+	return result
+}
+
+func GenericFilterInPlace(slicePtr, function interface{}) {
+	in := reflect.ValueOf(slicePtr)
+	if in.Kind() != reflect.Ptr {
+		panic("FilterInPlace: wrong type, " +
+			"not a pointer to slice")
+	}
+	_, n := filter(in.Elem().Interface(), function, true)
+	in.Elem().SetLen(n)
+}
+
+var boolType = reflect.ValueOf(true).Type()
+
+func filter(slice, function interface{}, inPlace bool) (interface{}, int) {
+
+	sliceInType := reflect.ValueOf(slice)
+	if sliceInType.Kind() != reflect.Slice {
+		panic("filter: wrong type, not a slice")
+	}
+
+	fn := reflect.ValueOf(function)
+	elemType := sliceInType.Type().Elem()
+	if !verifySignature(fn, elemType, boolType) {
+		panic("filter: function must be of type func(" + elemType.String() + ") bool")
+	}
+
+	var which []int
+	for i := 0; i < sliceInType.Len(); i++ {
+		if fn.Call([]reflect.Value{sliceInType.Index(i)})[0].Bool() {
+			which = append(which, i)
+		}
+	}
+
+	out := sliceInType
+
+	if !inPlace {
+		out = reflect.MakeSlice(sliceInType.Type(), len(which), len(which))
+	}
+	for i := range which {
+		out.Index(i).Set(sliceInType.Index(which[i]))
+	}
+
+	return out.Interface(), len(which)
 }
 
 func main() {
@@ -212,20 +292,20 @@ func main() {
 	fmt.Println(sum)
 
 	fmt.Println("------------使用简单的泛型Map------------")
+
+	//整数数组
 	arr3 := []int{1, 2, 3, 4}
 	res2 := Map(arr3, func(x int) int {
 		return x * x
 	})
 	fmt.Println(res2)
 
+	//字符串数组
 	arr4 := []string{"Java", "Golang", "Python", "Rust"}
 	res4 := Map(arr4, strings.ToUpper)
 	fmt.Println(res4)
 
 	fmt.Println("------------使用健壮版的泛型Map------------")
-	//strs := []string{"1", "2", "4"}
-	//vs := reflect.ValueOf(strs)
-	//fmt.Println(vs.Len())
 
 	//用于字符串数组
 	list := []string{"1", "2", "3", "4", "5"}
@@ -245,4 +325,19 @@ func main() {
 	})
 	fmt.Println(nums)
 	fmt.Println(aa)
+
+	//用于结构体
+	var employeeList = []Employee{
+		{"Hao", 44, 4, 8000},
+		{"Bob", 34, 10, 5000},
+		{"Alice", 23, 5, 9000},
+		{"Jack", 26, 3, 4000},
+	}
+
+	lis, _ := Transform(employeeList, func(e Employee) Employee {
+		e.Salary += 1000
+		e.Vacation += 1
+		return e
+	})
+	fmt.Printf("%+v\n", lis)
 }

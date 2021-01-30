@@ -7,6 +7,8 @@ import (
 	"reflect"
 )
 
+//Go Generation
+
 //一个简单的容器，支持任意数据类型
 type Container []interface{}
 
