@@ -81,3 +81,15 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [函数式编程](https://coolshell.cn/articles/10822.html)
 
+[go-decorator-pattern](https://github.com/alex-leonhardt/go-decorator-pattern)
+
+[go-decorator-pattern](https://github.com/alex-leonhardt/go-decorator-pattern)
+
+### 八、Pipeline
+
+[pipeline.go](https://github.com/roseduan/go-patterns/blob/main/pipeline.go)
+
+参考阅读：
+
+[Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines)
+
