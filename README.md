@@ -93,3 +93,13 @@ Go 语言编程模式最佳实践，来源于耗子叔的博客分享总结，�
 
 [Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines)
 
+### 九、Visitor 模式
+
+[visitor.go](https://github.com/roseduan/go-patterns/blob/main/visitor.go)
+
+参考阅读：
+
+[Visitor Design Pattern in Golang](https://medium.com/@felipedutratine/visitor-design-pattern-in-golang-3c142a12945a)
+
+[Visitor in Golang](https://gist.github.com/francoishill/f0624e7760aacdc96b42)
+
